@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles2.css') }}">
+    <title>Title</title>
+</head>
+<body>
+<div class="camera-section">
+        <img id="videoFeed" src="{{ url_for('video_feed') }}" width="640" height="480" alt="Live Webcam Feed">
+    </div>
+<div class="container">
+    <div class="input-section">
+        <form id="addPersonForm" action="/newPerson" method="post">
+            <input type="text" id="name" name="name" placeholder="Enter name...">
+            <button id="confirmButton" type="button">Confirm</button>
+        </form>
+    </div>
+    <form id="takePicture" action="/capture" method="post" >
+        <div class="camera-section">
+        <button id="takePictureButton">Take Picture</button>
+        </div>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

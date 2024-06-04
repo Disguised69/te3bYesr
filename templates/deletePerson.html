@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/deleteStyle.css') }}">
+</head>
+<body>
+<div class="container">
+    <input type="text" id="nameToDelete" name="nameToDelete" placeholder="Enter name to delete">
+    <button id="deleteButton" type="button">Delete</button>
+</div>
+<script src="{{ url_for('static', filename='deletePerson.js') }}"></script>
+</body>
+</html>
