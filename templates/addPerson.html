@@ -12,18 +12,25 @@
     </div>
 <div class="container">
     <div class="input-section">
-        <form id="addPersonForm" action="/newPerson" method="post">
+        <form id="addPersonForm" >
             <input type="text" id="name" name="name" placeholder="Enter name...">
             <button id="confirmButton" type="button">Confirm</button>
         </form>
     </div>
-    <form id="takePicture" action="/capture" method="post" >
+    <form id="takePicture"  >
         <div class="camera-section">
-        <button id="takePictureButton">Take Picture</button>
+        <button id="takePictureButton" type="button">Take Picture</button>
         </div>
     </form>
+    <div>
+        <p id="pictureCount">Total pictures taken: 0</p>
+        <p>(Recommended at least 10 pictures)</p>
+    </div>
+    <div>
+        <button id="back" type="button">return home</button>
+    </div>
 </div>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
-</html>
+</html> 

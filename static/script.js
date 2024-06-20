@@ -54,12 +54,36 @@ fetch('/capture', {
     })
     .then(data => {
         if (data.status === 'success') {
-            console.log(data.message);
+            console.log(`Total pictures taken: ${data.count}`);
+            const countElement = document.getElementById("pictureCount");
+            countElement.textContent = `Total pictures taken: ${data.count}`;
         } else {
-            console.log(data.message);
+            alert(data.message);
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => alert('Error: no face detected'));
 });
+ async function resumeFaceRecognition() {
+            try {
+                const response = await fetch('/resume_capture', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
 
+                if (!response.ok) {
+                    throw new Error('Failed to resume face recognition');
+                }
 
+                console.log('Face recognition resumed successfully.');
+            } catch (error) {
+                console.error('Error resuming face recognition:', error.message);
+            }
+        }
+
+document.getElementById("back").addEventListener("click", function (){
+            resumeFaceRecognition();
+            window.location.href = "/main";
+        });

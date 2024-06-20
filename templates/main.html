@@ -14,18 +14,67 @@
         <div class="button">
             <button id="addPerson">Add Person</button>
             <button id="deletePersonButton">Delete Person</button>
-            <button>List of persons</button>
-            <button>Log History</button>
+            <button onclick="listPersons()">List of persons</button>
+            <button id="logHistory">Log History</button>
+            <ul id="persons-list"></ul>
         </div>
     </div>
 </div>
  <script>
+     async function pauseFaceRecognition() {
+            try {
+                const response = await fetch('/pause_capture', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to pause face recognition');
+                }
+
+                console.log('Face recognition paused successfully.');
+            } catch (error) {
+                console.error('Error pausing face recognition:', error.message);
+            }
+        }
+
+
         document.getElementById("addPerson").addEventListener("click", function (){
+            pauseFaceRecognition();
             window.location.href = "/add_person";
         });
         document.getElementById("deletePersonButton").addEventListener("click", function (){
             window.location.href = "/delete_person";
         });
-    </script>
+        document.getElementById("logHistory").addEventListener("click", function (){
+        window.location.href = "/log_history";
+        });
+        function listPersons() {
+    fetch('/list_persons')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            let personsList = document.getElementById('persons-list');
+            personsList.innerHTML = '';
+            data.persons.forEach(person => {
+                let listItem = document.createElement('li');
+                listItem.textContent = person;
+                personsList.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching persons list:', error);
+        });
+}
+
+
+    </script  >
+
 </body>
 </html>
